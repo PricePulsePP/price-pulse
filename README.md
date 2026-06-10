@@ -34,7 +34,8 @@ Open `http://localhost:8000`.
 - `data/tokens.json` is the curated token manifest.
 - `site/market.json` is the generated, publishable market snapshot.
 - `site/market-data.js` provides the same snapshot for immediate browser rendering.
-- `scripts/refresh-market.mjs` refreshes pool data and calculates 7-day change.
+- `scripts/refresh-market.mjs` refreshes pool data and calculates ADA-denominated
+  7-day change.
 
 Prices and pool metrics are sourced from the GeckoTerminal API. Market cap is
 calculated as token price multiplied by the circulating supply recorded in the
@@ -48,9 +49,9 @@ marked stale price fallback until a public source becomes available.
 
 The deployment workflow has multiple staggered schedule opportunities each
 hour so a delayed scheduler event does not leave the dataset stale. It
-refreshes prices and pool metrics while preserving the last successful 7-day
-changes to avoid rate-limited per-token history calls.
-A manual local refresh without `SKIP_OHLCV=1` recalculates 7-day changes.
+refreshes prices and pool metrics frequently. A paced daily run refreshes
+7-day changes without delaying the frequent market updates or exceeding
+provider limits.
 
 ## Publishing
 

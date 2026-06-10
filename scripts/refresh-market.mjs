@@ -26,7 +26,9 @@ if (unresolved.length) {
   throw new Error(`Manifest has unresolved asset addresses: ${unresolved.map((token) => token.symbol).join(", ")}`);
 }
 
-const currentPools = await fetchPools(manifest.map((token) => token.poolAddress).filter(Boolean));
+const currentPools = await fetchPools(
+  [...new Set(manifest.flatMap((token) => [token.poolAddress, token.historyPoolAddress]).filter(Boolean))]
+);
 const poolByAddress = new Map(currentPools.data.map((pool) => [pool.attributes.address, pool]));
 const adaUsd = currentPools.data
   .map((pool) => calculateAdaUsd(pool.attributes))
@@ -155,10 +157,11 @@ async function fetchSevenDayChanges(tokens, poolByAddress) {
       continue;
     }
     try {
-      const pool = poolByAddress.get(token.poolAddress);
+      const historyPoolAddress = token.historyPoolAddress || token.poolAddress;
+      const pool = poolByAddress.get(historyPoolAddress);
       const baseId = pool?.relationships?.base_token?.data?.id;
       const side = baseId === `cardano_${token.assetAddress}` ? "base" : "quote";
-      const url = `https://api.geckoterminal.com/api/v2/networks/cardano/pools/${encodeURIComponent(token.poolAddress)}/ohlcv/day?aggregate=1&limit=8&currency=usd&token=${side}`;
+      const url = `https://api.geckoterminal.com/api/v2/networks/cardano/pools/${encodeURIComponent(historyPoolAddress)}/ohlcv/day?aggregate=1&limit=8&currency=token&token=${side}`;
       const payload = await fetchJson(url);
       changes.set(token.poolAddress, calculateSevenDayChange(payload.data?.attributes?.ohlcv_list));
     } catch (error) {

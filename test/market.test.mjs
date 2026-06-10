@@ -73,6 +73,24 @@ test("calculates market cap from an explicit circulating supply", () => {
   assert.equal(result.marketCap.ada, 150);
 });
 
+test("can value FDV using the same minted supply as market cap", () => {
+  const result = normalizePool(
+    { ...token, fdvEqualsMarketCap: true },
+    pool,
+    marketToken,
+    null,
+    100
+  );
+  assert.deepEqual(result.fdv, result.marketCap);
+});
+
+test("treats non-positive provider FDV as missing", () => {
+  const result = normalizePool(token, pool, {
+    attributes: { ...marketToken.attributes, fdv_usd: "0" }
+  });
+  assert.deepEqual(result.fdv, { usd: null, ada: null });
+});
+
 test("uses accurate base-pool fields when token-level data is missing", () => {
   const result = normalizePool(token, pool, null);
   assert.equal(result.price.usd, 0.25);

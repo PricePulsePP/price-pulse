@@ -6,6 +6,8 @@ on:
     # Multiple staggered opportunities make the hourly refresh resilient to
     # delayed or dropped GitHub schedule events.
     - cron: "8,28,48 * * * *"
+    # A paced daily run refreshes the more request-intensive 7-day histories.
+    - cron: "3 4 * * *"
 
 permissions:
   contents: read
@@ -19,7 +21,7 @@ concurrency:
 jobs:
   refresh-and-deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -40,7 +42,8 @@ jobs:
         run: npm run refresh
         env:
           PREVIOUS_MARKET_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/market.json
-          SKIP_OHLCV: "1"
+          SKIP_OHLCV: ${{ github.event.schedule == '3 4 * * *' && '0' || '1' }}
+          OHLCV_PAUSE_MS: "7000"
 
       - name: Validate market snapshot
         run: npm run validate
