@@ -1,12 +1,22 @@
 # Price Pulse
 
-**PP Hourly Cardano Token Prices**
-
 Website: https://pricepulsepp.github.io/price-pulse/
 
-Price Pulse is a static Cardano native-token market board. It publishes a
-curated set of 50 tokens ranked by market cap and refreshes the market dataset
-hourly.
+Price Pulse is a dynamic Cardano native-token market board. It publishes prices
+and market data for 50 leading Cardano tokens, ranks them by market cap, and
+refreshes the market dataset hourly.
+
+## No-cost infrastructure
+
+Price Pulse runs entirely on services that do not require paid infrastructure:
+
+- GeckoTerminal provides prices and primary-pool market metrics without an API key.
+- Koios provides selected on-chain token-supply data.
+- GitHub Actions refreshes, validates, and deploys the market dataset hourly.
+- GitHub Pages hosts the public website.
+
+No paid hosting, market-data subscription, API key, or repository secret is
+required.
 
 ## Local use
 
@@ -57,5 +67,5 @@ not require market-data API keys or repository secrets.
 
 The supplied Price Pulse artwork is optimized at
 `site/assets/price-pulse-header.jpg` and displayed as the responsive site
-header. Replace the temporary GitHub homepage link in `site/index.html` with
-the public repository URL when publishing.
+header. The social link preview is available at
+`site/assets/social-preview.jpg`.
