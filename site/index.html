@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The pulse of Cardano token prices. Refreshed hourly. Open source. Beta.">
+    <meta name="theme-color" content="#07110f">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Price Pulse">
+    <meta property="og:title" content="Price Pulse">
+    <meta property="og:description" content="The pulse of Cardano token prices. Refreshed hourly. Open source. Beta.">
+    <meta property="og:url" content="https://pricepulsepp.github.io/price-pulse/">
+    <meta property="og:image" content="https://pricepulsepp.github.io/price-pulse/assets/social-preview.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Price Pulse: The pulse of Cardano token prices">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Price Pulse">
+    <meta name="twitter:description" content="The pulse of Cardano token prices. Refreshed hourly. Open source. Beta.">
+    <meta name="twitter:image" content="https://pricepulsepp.github.io/price-pulse/assets/social-preview.jpg">
+    <link rel="canonical" href="https://pricepulsepp.github.io/price-pulse/">
+    <title>Price Pulse | Hourly Cardano Token Prices</title>
+    <link rel="preconnect" href="https://coin-images.coingecko.com">
+    <link rel="stylesheet" href="./styles.css?v=12">
+  </head>
+  <body>
+    <div class="ambient ambient-a"></div>
+    <div class="ambient ambient-b"></div>
+
+    <header class="site-header">
+      <img
+        class="brand-banner"
+        src="./assets/price-pulse-header.jpg"
+        alt="Price Pulse with Cardano and Midnight emblems"
+      >
+      <div class="banner-content">
+        <div class="header-controls">
+          <div class="currency-toggle" role="group" aria-label="Display currency">
+            <button class="currency-option active" data-currency="ada" type="button">ADA</button>
+            <button class="currency-option" data-currency="usd" type="button">USD</button>
+          </div>
+          <div class="status-card">
+            <span class="status-dot" id="status-dot"></span>
+            <div>
+              <span class="status-label" id="status-label">Loading market</span>
+              <time id="updated-at">Waiting for snapshot</time>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="intro">
+        <h1>The pulse of Cardano token prices.</h1>
+        <p>
+          Refreshed hourly. <a href="https://github.com/PricePulsePP/price-pulse" target="_blank" rel="noreferrer">Open source.</a>
+          Beta.
+        </p>
+      </section>
+
+      <section class="market-panel" aria-label="Cardano token market">
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th class="rank-column" scope="col">#</th>
+                <th class="token-column" scope="col">Token</th>
+                <th class="numeric" scope="col">Price</th>
+                <th class="numeric" scope="col">24h</th>
+                <th class="numeric" scope="col">1h</th>
+                <th class="numeric" scope="col">7d</th>
+                <th class="numeric" scope="col">Market Cap</th>
+                <th class="numeric" scope="col">Volume</th>
+                <th class="numeric" scope="col">Liquidity</th>
+                <th class="numeric" scope="col">FDV</th>
+                <th class="numeric" scope="col">Txns</th>
+              </tr>
+            </thead>
+            <tbody id="market-body">
+              <tr class="loading-row">
+                <td colspan="11">
+                  <div class="loading-state">
+                    <span class="loader"></span>
+                    <span>Reading the latest market snapshot</span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="./market-data.js"></script>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

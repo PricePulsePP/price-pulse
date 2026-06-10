@@ -1,0 +1,14 @@
+{
+  "name": "price-pulse",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "refresh": "node scripts/refresh-market.mjs",
+    "test": "node --test",
+    "validate": "node scripts/validate-market.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
