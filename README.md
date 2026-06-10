@@ -35,6 +35,10 @@ Transaction count, volume, liquidity, and age describe each token's selected
 primary pool. Tokens without a usable provider pool may use an explicitly
 marked stale price fallback until a public source becomes available.
 
+The hourly deployment refreshes prices and pool metrics while preserving the
+last successful 7-day changes to avoid rate-limited per-token history calls.
+A manual local refresh without `SKIP_OHLCV=1` recalculates 7-day changes.
+
 ## Publishing
 
 The `refresh-and-deploy` workflow refreshes and validates the dataset before
