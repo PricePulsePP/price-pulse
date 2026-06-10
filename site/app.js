@@ -17,6 +17,7 @@ const updatedAt = document.querySelector("#updated-at");
 const statusLabel = document.querySelector("#status-label");
 const statusDot = document.querySelector("#status-dot");
 const currencyButtons = [...document.querySelectorAll("[data-currency]")];
+const refreshIntervalMs = 5 * 60 * 1000;
 
 currencyButtons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -34,20 +35,34 @@ if (state.snapshot) {
 } else {
   loadMarket();
 }
+setInterval(() => loadMarket({ quiet: true }), refreshIntervalMs);
 
-async function loadMarket() {
+async function loadMarket({ quiet = false } = {}) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 5000);
   try {
-    const response = await fetch("./market.json", {
+    const response = await fetch(`./market.json?refresh=${Date.now()}`, {
       cache: "no-cache",
       signal: controller.signal
     });
     if (!response.ok) throw new Error(`Market request returned ${response.status}`);
-    state.snapshot = await response.json();
+    const snapshot = await response.json();
+    if (
+      state.snapshot &&
+      new Date(snapshot.generatedAt).getTime() <= new Date(state.snapshot.generatedAt).getTime()
+    ) {
+      renderStatus();
+      return;
+    }
+    state.snapshot = snapshot;
     renderStatus();
     renderRows();
   } catch (error) {
+    if (quiet && state.snapshot) {
+      renderStatus();
+      console.error(error);
+      return;
+    }
     statusDot.classList.add("error");
     statusLabel.textContent = "Snapshot unavailable";
     updatedAt.textContent = "Try again shortly";

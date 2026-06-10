@@ -12,7 +12,8 @@ Price Pulse runs entirely on services that do not require paid infrastructure:
 
 - GeckoTerminal provides prices and primary-pool market metrics without an API key.
 - Koios provides selected on-chain token-supply data.
-- GitHub Actions refreshes, validates, and deploys the market dataset hourly.
+- GitHub Actions uses staggered schedule opportunities to refresh, validate,
+  and deploy the market dataset at least hourly.
 - GitHub Pages hosts the public website.
 
 No paid hosting, market-data subscription, API key, or repository secret is
@@ -45,8 +46,10 @@ Transaction count, volume, liquidity, and age describe each token's selected
 primary pool. Tokens without a usable provider pool may use an explicitly
 marked stale price fallback until a public source becomes available.
 
-The hourly deployment refreshes prices and pool metrics while preserving the
-last successful 7-day changes to avoid rate-limited per-token history calls.
+The deployment workflow has multiple staggered schedule opportunities each
+hour so a delayed scheduler event does not leave the dataset stale. It
+refreshes prices and pool metrics while preserving the last successful 7-day
+changes to avoid rate-limited per-token history calls.
 A manual local refresh without `SKIP_OHLCV=1` recalculates 7-day changes.
 
 ## Publishing

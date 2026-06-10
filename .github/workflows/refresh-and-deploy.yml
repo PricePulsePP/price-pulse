@@ -3,7 +3,9 @@ name: Refresh and deploy Price Pulse
 on:
   workflow_dispatch:
   schedule:
-    - cron: "17 * * * *"
+    # Multiple staggered opportunities make the hourly refresh resilient to
+    # delayed or dropped GitHub schedule events.
+    - cron: "8,28,48 * * * *"
 
 permissions:
   contents: read
@@ -17,6 +19,7 @@ concurrency:
 jobs:
   refresh-and-deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
