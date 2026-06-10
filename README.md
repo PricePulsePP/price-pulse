@@ -49,9 +49,9 @@ marked stale price fallback until a public source becomes available.
 
 The deployment workflow has multiple staggered schedule opportunities each
 hour so a delayed scheduler event does not leave the dataset stale. It
-refreshes prices and pool metrics frequently. A paced daily run refreshes
-7-day changes without delaying the frequent market updates or exceeding
-provider limits.
+refreshes prices and pool metrics frequently. Paced daily and manual runs
+refresh 7-day changes without delaying the frequent market updates or
+exceeding provider limits.
 
 ## Publishing
 

@@ -42,7 +42,7 @@ jobs:
         run: npm run refresh
         env:
           PREVIOUS_MARKET_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/market.json
-          SKIP_OHLCV: ${{ github.event.schedule == '3 4 * * *' && '0' || '1' }}
+          SKIP_OHLCV: ${{ github.event.schedule == '8,28,48 * * * *' && '1' || '0' }}
           OHLCV_PAUSE_MS: "7000"
 
       - name: Validate market snapshot
