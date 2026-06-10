@@ -32,10 +32,14 @@ updateCurrencyControls();
 if (state.snapshot) {
   renderStatus();
   renderRows();
-} else {
-  loadMarket();
 }
+loadMarket({ quiet: Boolean(state.snapshot) });
 setInterval(() => loadMarket({ quiet: true }), refreshIntervalMs);
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible") {
+    loadMarket({ quiet: true });
+  }
+});
 
 async function loadMarket({ quiet = false } = {}) {
   const controller = new AbortController();
