@@ -2,10 +2,19 @@ name: Refresh and deploy Price Pulse
 
 on:
   workflow_dispatch:
+    inputs:
+      full_history:
+        description: Refresh all 7-day histories
+        required: false
+        type: boolean
+        default: false
   schedule:
-    # Multiple staggered opportunities make the hourly refresh resilient to
-    # delayed or dropped GitHub schedule events.
-    - cron: "8,28,48 * * * *"
+    # Explicit staggered schedules improve resilience to delayed or dropped
+    # GitHub schedule events.
+    - cron: "7 * * * *"
+    - cron: "22 * * * *"
+    - cron: "37 * * * *"
+    - cron: "52 * * * *"
     # A paced daily run refreshes the more request-intensive 7-day histories.
     - cron: "3 4 * * *"
 
@@ -42,7 +51,7 @@ jobs:
         run: npm run refresh
         env:
           PREVIOUS_MARKET_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/market.json
-          SKIP_OHLCV: ${{ github.event.schedule == '8,28,48 * * * *' && '1' || '0' }}
+          SKIP_OHLCV: ${{ (github.event.schedule == '3 4 * * *' || inputs.full_history == true) && '0' || '1' }}
           OHLCV_PAUSE_MS: "7000"
 
       - name: Validate market snapshot

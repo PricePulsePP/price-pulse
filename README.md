@@ -49,9 +49,12 @@ marked stale price fallback until a public source becomes available.
 
 The deployment workflow has multiple staggered schedule opportunities each
 hour so a delayed scheduler event does not leave the dataset stale. It
-refreshes prices and pool metrics frequently. Paced daily and manual runs
-refresh 7-day changes without delaying the frequent market updates or
-exceeding provider limits.
+refreshes prices and pool metrics frequently. Paced daily and optional
+full-history manual runs refresh 7-day changes without delaying the frequent
+market updates or exceeding provider limits.
+
+Manual workflow runs are fast by default. Select `full_history` when manually
+starting the workflow to refresh all 7-day histories.
 
 ## Publishing
 
