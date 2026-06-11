@@ -58,7 +58,7 @@ starting the workflow to refresh all 7-day histories.
 
 ## Publishing
 
-The `refresh-and-deploy` workflow refreshes and validates the dataset before
+The `publish-market` workflow refreshes and validates the dataset before
 deploying the `site` directory to GitHub Pages. Configure Pages to use GitHub
 Actions as its source.
 

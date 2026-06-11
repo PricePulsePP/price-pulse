@@ -1,4 +1,4 @@
-name: Refresh and deploy Price Pulse
+name: Publish Price Pulse market data
 
 on:
   workflow_dispatch:
@@ -9,12 +9,8 @@ on:
         type: boolean
         default: false
   schedule:
-    # Explicit staggered schedules improve resilience to delayed or dropped
-    # GitHub schedule events.
-    - cron: "7 * * * *"
-    - cron: "22 * * * *"
-    - cron: "37 * * * *"
-    - cron: "52 * * * *"
+    # Run away from the start of the hour, when GitHub's scheduler is busiest.
+    - cron: "13 * * * *"
     # A paced daily run refreshes the more request-intensive 7-day histories.
     - cron: "3 4 * * *"
 
