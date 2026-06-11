@@ -3,7 +3,7 @@
 Website: https://pricepulsepp.github.io/price-pulse/
 
 Price Pulse is a dynamic Cardano native-token market board. It publishes prices
-and market data for 50 leading Cardano tokens, ranks them by market cap, and
+and market data for 49 leading Cardano tokens, ranks them by market cap, and
 refreshes the market dataset hourly.
 
 ## No-cost infrastructure

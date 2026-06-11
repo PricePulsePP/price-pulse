@@ -637,41 +637,6 @@
       "rank": 18
     },
     {
-      "rank": 19,
-      "symbol": "SONG",
-      "name": "Song",
-      "assetAddress": "f71b4cf652d8edb33a57928b8b8a546a3c954b7ba24db5583ac79b34534f4e474d41524b4554434150",
-      "poolAddress": "",
-      "imageUrl": null,
-      "price": {
-        "usd": 0.0018202380000000027,
-        "ada": 0.0114
-      },
-      "change": {
-        "h1": null,
-        "h24": null
-      },
-      "transactions24h": null,
-      "volume24h": {
-        "usd": null,
-        "ada": null
-      },
-      "liquidity": {
-        "usd": null,
-        "ada": null
-      },
-      "marketCap": {
-        "usd": 1772337.0000000026,
-        "ada": 11100000
-      },
-      "fdv": {
-        "usd": null,
-        "ada": null
-      },
-      "poolCreatedAt": null,
-      "stale": true
-    },
-    {
       "symbol": "NTX",
       "name": "NuNet",
       "assetAddress": "edfd7a1d77bcb8b884c474bdc92a16002d1fb720e454fa6e993444794e5458",
@@ -704,7 +669,7 @@
       },
       "poolCreatedAt": "2024-07-09T11:41:22Z",
       "stale": false,
-      "rank": 20
+      "rank": 19
     },
     {
       "symbol": "FLDT",
@@ -739,7 +704,7 @@
       },
       "poolCreatedAt": "2024-07-09T11:41:22Z",
       "stale": false,
-      "rank": 21
+      "rank": 20
     },
     {
       "symbol": "iUSD",
@@ -774,7 +739,7 @@
       },
       "poolCreatedAt": "2024-05-21T11:21:48Z",
       "stale": false,
-      "rank": 22
+      "rank": 21
     },
     {
       "symbol": "RISE",
@@ -809,7 +774,7 @@
       },
       "poolCreatedAt": "2025-11-13T16:16:13Z",
       "stale": false,
-      "rank": 23
+      "rank": 22
     },
     {
       "symbol": "PALM",
@@ -844,7 +809,7 @@
       },
       "poolCreatedAt": "2025-04-14T12:08:52Z",
       "stale": false,
-      "rank": 24
+      "rank": 23
     },
     {
       "symbol": "STUFF",
@@ -879,7 +844,7 @@
       },
       "poolCreatedAt": "2024-07-09T11:41:22Z",
       "stale": false,
-      "rank": 25
+      "rank": 24
     },
     {
       "symbol": "SUNDAE",
@@ -914,7 +879,7 @@
       },
       "poolCreatedAt": "2022-03-24T11:06:44Z",
       "stale": false,
-      "rank": 26
+      "rank": 25
     },
     {
       "symbol": "ATLAS",
@@ -949,7 +914,7 @@
       },
       "poolCreatedAt": "2026-06-01T17:17:25Z",
       "stale": false,
-      "rank": 27
+      "rank": 26
     },
     {
       "symbol": "rsERG",
@@ -984,7 +949,7 @@
       },
       "poolCreatedAt": "2024-07-11T15:09:19Z",
       "stale": false,
-      "rank": 28
+      "rank": 27
     },
     {
       "symbol": "COCK",
@@ -1019,7 +984,7 @@
       },
       "poolCreatedAt": "2025-01-03T10:00:53Z",
       "stale": false,
-      "rank": 29
+      "rank": 28
     },
     {
       "symbol": "BANK",
@@ -1054,7 +1019,7 @@
       },
       "poolCreatedAt": "2024-07-09T11:41:22Z",
       "stale": false,
-      "rank": 30
+      "rank": 29
     },
     {
       "symbol": "SURGE",
@@ -1089,7 +1054,7 @@
       },
       "poolCreatedAt": "2025-09-25T22:43:56Z",
       "stale": false,
-      "rank": 31
+      "rank": 30
     },
     {
       "symbol": "TITAN",
@@ -1124,7 +1089,7 @@
       },
       "poolCreatedAt": "2024-09-30T14:27:05Z",
       "stale": false,
-      "rank": 32
+      "rank": 31
     },
     {
       "symbol": "REVU",
@@ -1159,7 +1124,7 @@
       },
       "poolCreatedAt": "2024-11-17T15:25:14Z",
       "stale": false,
-      "rank": 33
+      "rank": 32
     },
     {
       "symbol": "NMKR",
@@ -1194,7 +1159,7 @@
       },
       "poolCreatedAt": "2024-07-09T11:41:50Z",
       "stale": false,
-      "rank": 34
+      "rank": 33
     },
     {
       "symbol": "XER",
@@ -1229,7 +1194,7 @@
       },
       "poolCreatedAt": "2024-11-15T22:59:41Z",
       "stale": false,
-      "rank": 35
+      "rank": 34
     },
     {
       "symbol": "NIKEPIG",
@@ -1264,7 +1229,7 @@
       },
       "poolCreatedAt": "2024-07-09T11:41:50Z",
       "stale": false,
-      "rank": 36
+      "rank": 35
     },
     {
       "symbol": "BBSNEK",
@@ -1299,7 +1264,7 @@
       },
       "poolCreatedAt": "2024-07-10T11:20:53Z",
       "stale": false,
-      "rank": 37
+      "rank": 36
     },
     {
       "symbol": "PULSE",
@@ -1334,7 +1299,7 @@
       },
       "poolCreatedAt": "2025-11-21T19:26:33Z",
       "stale": false,
-      "rank": 38
+      "rank": 37
     },
     {
       "symbol": "BTN",
@@ -1369,7 +1334,7 @@
       },
       "poolCreatedAt": "2024-07-10T12:08:56Z",
       "stale": false,
-      "rank": 39
+      "rank": 38
     },
     {
       "symbol": "MILK",
@@ -1404,7 +1369,7 @@
       },
       "poolCreatedAt": "2022-03-24T11:11:02Z",
       "stale": false,
-      "rank": 40
+      "rank": 39
     },
     {
       "symbol": "iBTC",
@@ -1439,10 +1404,10 @@
       },
       "poolCreatedAt": "2024-07-09T11:41:22Z",
       "stale": false,
-      "rank": 41
+      "rank": 40
     },
     {
-      "rank": 42,
+      "rank": 41,
       "symbol": "WRT",
       "name": "WingRiders",
       "assetAddress": "c0ee29a85b13209423b10447d3c2e6a50641a15c57770e27cb9d507357696e67526964657273",
@@ -1509,7 +1474,7 @@
       },
       "poolCreatedAt": "2024-07-10T05:57:31Z",
       "stale": false,
-      "rank": 43
+      "rank": 42
     },
     {
       "symbol": "BODEGA",
@@ -1544,7 +1509,7 @@
       },
       "poolCreatedAt": "2024-12-05T23:14:05Z",
       "stale": false,
-      "rank": 44
+      "rank": 43
     },
     {
       "symbol": "HUNT",
@@ -1579,7 +1544,7 @@
       },
       "poolCreatedAt": "2024-07-09T11:41:22Z",
       "stale": false,
-      "rank": 45
+      "rank": 44
     },
     {
       "symbol": "CSWAP",
@@ -1614,7 +1579,7 @@
       },
       "poolCreatedAt": "2025-03-19T20:03:01Z",
       "stale": false,
-      "rank": 46
+      "rank": 45
     },
     {
       "symbol": "RJV",
@@ -1649,7 +1614,7 @@
       },
       "poolCreatedAt": "2024-07-09T11:41:50Z",
       "stale": false,
-      "rank": 47
+      "rank": 46
     },
     {
       "symbol": "PAVIA",
@@ -1684,7 +1649,7 @@
       },
       "poolCreatedAt": "2022-03-24T11:08:07Z",
       "stale": false,
-      "rank": 48
+      "rank": 47
     },
     {
       "symbol": "VYFI",
@@ -1719,7 +1684,7 @@
       },
       "poolCreatedAt": "2022-03-24T11:10:51Z",
       "stale": false,
-      "rank": 49
+      "rank": 48
     },
     {
       "symbol": "BOO",
@@ -1754,7 +1719,7 @@
       },
       "poolCreatedAt": "2024-11-25T15:53:36Z",
       "stale": false,
-      "rank": 50
+      "rank": 49
     }
   ]
 }

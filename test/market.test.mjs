@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
+  EXPECTED_TOKEN_COUNT,
   calculateAdaUsd,
   convertUsdToAda,
   fallbackToken,
@@ -157,10 +158,10 @@ test("fallback can use a stale ADA price override", () => {
 });
 
 test("validates row count, uniqueness, completeness, and order", () => {
-  const tokens = Array.from({ length: 50 }, (_, index) => ({
+  const tokens = Array.from({ length: EXPECTED_TOKEN_COUNT }, (_, index) => ({
     symbol: `T${index}`,
     price: { usd: 1 },
-    marketCap: { usd: 50 - index }
+    marketCap: { usd: EXPECTED_TOKEN_COUNT - index }
   }));
   assert.deepEqual(validateSnapshot({ tokens }), []);
   tokens[1].symbol = tokens[0].symbol;
@@ -168,10 +169,10 @@ test("validates row count, uniqueness, completeness, and order", () => {
 });
 
 test("rejects snapshots below the provider completeness threshold", () => {
-  const tokens = Array.from({ length: 50 }, (_, index) => ({
+  const tokens = Array.from({ length: EXPECTED_TOKEN_COUNT }, (_, index) => ({
     symbol: `T${index}`,
     price: { usd: index < 29 ? 1 : null },
-    marketCap: { usd: index < 29 ? 50 - index : null }
+    marketCap: { usd: index < 29 ? EXPECTED_TOKEN_COUNT - index : null }
   }));
-  assert.ok(validateSnapshot({ tokens }).some((error) => error.includes("29/50")));
+  assert.ok(validateSnapshot({ tokens }).some((error) => error.includes("29/49")));
 });
