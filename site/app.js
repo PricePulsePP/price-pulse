@@ -70,7 +70,7 @@ async function loadMarket({ quiet = false } = {}) {
     statusDot.classList.add("error");
     statusLabel.textContent = "Snapshot unavailable";
     updatedAt.textContent = "Try again shortly";
-    body.innerHTML = `<tr class="loading-row"><td colspan="11"><div class="empty-state">Market data is temporarily unavailable.</div></td></tr>`;
+    body.innerHTML = `<tr class="loading-row"><td colspan="10"><div class="empty-state">Market data is temporarily unavailable.</div></td></tr>`;
     console.error(error);
   } finally {
     clearTimeout(timeout);
@@ -108,7 +108,6 @@ function renderRow(token) {
       <td class="numeric price-cell" data-label="Price">${formatPrice(token.price?.[currency], currency)}</td>
       ${renderChange(token.change?.h24, "24h")}
       ${renderChange(token.change?.h1, "1h")}
-      ${renderChange(token.change?.d7, "7d")}
       <td class="numeric emphasis" data-label="Market Cap">${formatMoney(token.marketCap?.[currency], currency)}</td>
       <td class="numeric" data-label="Volume">${formatMoney(token.volume24h?.[currency], currency)}</td>
       <td class="numeric" data-label="Liquidity">${formatMoney(token.liquidity?.[currency], currency)}</td>

@@ -1,7 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
-  calculateSevenDayChange,
   calculateAdaUsd,
   convertUsdToAda,
   fallbackToken,
@@ -46,29 +45,23 @@ const marketToken = {
   }
 };
 
-test("calculates seven day change from newest and eighth daily closes", () => {
-  const list = Array.from({ length: 8 }, (_, index) => [0, 0, 0, 0, index === 0 ? 120 : 100, 0]);
-  assert.equal(calculateSevenDayChange(list), 20);
-  assert.equal(calculateSevenDayChange([]), null);
-});
-
 test("converts USD values using token prices", () => {
   assert.equal(convertUsdToAda(100, 0.25, 1.5), 600);
   assert.equal(convertUsdToAda(null, 0.25, 1.5), null);
 });
 
 test("normalizes provider pool fields", () => {
-  const result = normalizePool(token, pool, marketToken, 9.5);
+  const result = normalizePool(token, pool, marketToken);
   assert.equal(result.transactions24h, 20);
   assert.equal(result.volume24h.ada, 600);
   assert.equal(result.marketCap.ada, 6000);
-  assert.equal(result.change.d7, 9.5);
+  assert.deepEqual(result.change, { h1: 1.2, h24: -3.4 });
   assert.equal(result.imageUrl, "https://example.test/logo.png");
   assert.equal("category" in result, false);
 });
 
 test("calculates market cap from an explicit circulating supply", () => {
-  const result = normalizePool(token, pool, marketToken, null, 100);
+  const result = normalizePool(token, pool, marketToken, 100);
   assert.equal(result.marketCap.usd, 25);
   assert.equal(result.marketCap.ada, 150);
 });
@@ -78,7 +71,6 @@ test("can value FDV using the same minted supply as market cap", () => {
     { ...token, fdvEqualsMarketCap: true },
     pool,
     marketToken,
-    null,
     100
   );
   assert.deepEqual(result.fdv, result.marketCap);

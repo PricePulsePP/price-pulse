@@ -1,7 +1,6 @@
 import { readFile, writeFile } from "node:fs/promises";
 import {
   EXPECTED_TOKEN_COUNT,
-  calculateSevenDayChange,
   calculateAdaUsd,
   fallbackToken,
   normalizePool,
@@ -26,9 +25,7 @@ if (unresolved.length) {
   throw new Error(`Manifest has unresolved asset addresses: ${unresolved.map((token) => token.symbol).join(", ")}`);
 }
 
-const currentPools = await fetchPools(
-  [...new Set(manifest.flatMap((token) => [token.poolAddress, token.historyPoolAddress]).filter(Boolean))]
-);
+const currentPools = await fetchPools([...new Set(manifest.map((token) => token.poolAddress).filter(Boolean))]);
 const poolByAddress = new Map(currentPools.data.map((pool) => [pool.attributes.address, pool]));
 const adaUsd = currentPools.data
   .map((pool) => calculateAdaUsd(pool.attributes))
@@ -41,7 +38,6 @@ const circulatingSupplyByAddress = await fetchKoiosSupplies(
   manifest.filter((token) => token.marketCapSupplySource === "koios")
 );
 await pauseBetweenBatches(0, 2);
-const ohlcvByAddress = await fetchSevenDayChanges(manifest, poolByAddress);
 const normalized = manifest.map((token) => {
   const pool = poolByAddress.get(token.poolAddress);
   const marketToken = tokenByAddress.get(token.assetAddress);
@@ -53,7 +49,6 @@ const normalized = manifest.map((token) => {
     token,
     pool,
     marketToken,
-    ohlcvByAddress.get(token.poolAddress),
     circulatingSupplyByAddress.get(token.assetAddress)
   );
 });
@@ -138,41 +133,6 @@ async function fetchKoiosSupplies(tokens) {
     console.warn(`Koios supply refresh failed: ${error.message}`);
   }
   return supplies;
-}
-
-async function fetchSevenDayChanges(tokens, poolByAddress) {
-  const changes = new Map();
-  const pauseMs = Number(process.env.OHLCV_PAUSE_MS ?? 7000);
-  const skip = process.env.SKIP_OHLCV === "1";
-
-  for (const [index, token] of tokens.entries()) {
-    if (!token.poolAddress) {
-      continue;
-    }
-    if (!skip && index % 10 === 0) {
-      console.log(`Refreshing 7-day history: ${index + 1}/${tokens.length}`);
-    }
-    if (skip) {
-      changes.set(token.poolAddress, priorBySymbol.get(token.symbol)?.change?.d7 ?? null);
-      continue;
-    }
-    try {
-      const historyPoolAddress = token.historyPoolAddress || token.poolAddress;
-      const pool = poolByAddress.get(historyPoolAddress);
-      const baseId = pool?.relationships?.base_token?.data?.id;
-      const side = baseId === `cardano_${token.assetAddress}` ? "base" : "quote";
-      const url = `https://api.geckoterminal.com/api/v2/networks/cardano/pools/${encodeURIComponent(historyPoolAddress)}/ohlcv/day?aggregate=1&limit=8&currency=token&token=${side}`;
-      const payload = await fetchJson(url);
-      changes.set(token.poolAddress, calculateSevenDayChange(payload.data?.attributes?.ohlcv_list));
-    } catch (error) {
-      console.warn(`OHLCV failed for ${token.symbol}: ${error.message}`);
-      changes.set(token.poolAddress, priorBySymbol.get(token.symbol)?.change?.d7 ?? null);
-    }
-    if (index < tokens.length - 1) {
-      await new Promise((resolve) => setTimeout(resolve, pauseMs));
-    }
-  }
-  return changes;
 }
 
 async function readJson(path) {
