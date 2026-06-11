@@ -8,7 +8,7 @@ on:
         required: false
         type: boolean
         default: false
-  schedule:
+  #schedule:
     # Temporary scheduler diagnostic; remove after automatic delivery is verified.
     #- cron: "*/5 * * * *"
     # Run away from the start of the hour, when GitHub's scheduler is busiest.
