@@ -3,7 +3,7 @@ name: Browser-created hourly refresh
 on:
   workflow_dispatch:
   schedule:
-    - cron: "29 * * * *"
+    - cron: "47 * * * *"
 
 permissions:
   contents: read
